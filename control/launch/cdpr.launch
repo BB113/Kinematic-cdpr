@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find control)/config/cdpr_control.yaml" command="load"/>
+
+    <!-- load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="/cdpr" args="joint0_position_controller joint1_position_controller joint2_position_controller joint3_position_controller
+        joint4_position_controller joint5_position_controller joint6_position_controller joint7_position_controller
+        joint_state_controller"/>
+    
+    <param name="robot_description" command="cat $(find cdpr)/sdf/cube.sdf"/>
+    
+    <!-- convert joint states to TF transforms for rviz, etc -->
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+        <remap from="/joint_states" to="/cdpr/joint_states" />
+    </node>
+
+    <arg name="paused" default="true"/>
+    <arg name="model" default="cube"/>
+    <arg name="model_tra" default="rpc_tra_1"/>
+    <arg name="gui" default="true"/>
+
+    <!-- Launch Gazebo with empty world-->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="paused" value="$(arg paused)"/>
+    </include >
+
+    <!-- spawn robot -->
+    <node name="cdpr" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+        args="-sdf -model $(arg model) -file $(find cdpr)/sdf/$(arg model).sdf -x 0 -y -0 -z 0 -R 0 -P 0 -Y 0.0"/>    
+    
+    <!-- load model description -->
+    <rosparam file="$(find cdpr)/sdf/$(arg model).yaml" command="load" ns="model"/> 
+
+</launch>

@@ -1,0 +1,80 @@
+<transmission name="lift_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable0">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_0">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable1">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_1">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable2">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_2">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable3">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_3">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable4">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_4">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable5">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_5">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable6">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_6">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable7">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_7">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
