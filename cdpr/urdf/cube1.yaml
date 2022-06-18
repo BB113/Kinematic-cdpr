@@ -1,0 +1,116 @@
+cable:
+  mass: 0.001
+  radius: 0.005
+frame:
+  color: Grey
+  lower:
+  - -1.0
+  - -1.0
+  - 0
+  radius: 0.02
+  type: box
+  upper:
+  - 1.0
+  - 1.0
+  - 2.0
+joints:
+  actuated:
+    damping: 10
+    effort: 10000
+    min: 50
+    velocity: 0.25
+  passive:
+    damping: 0.1
+    effort: 10000
+    velocity: 0.25
+platform:
+  color: Red
+  inertia:
+  - 0.33
+  - 0.33
+  - 0.33
+  - 0.0
+  - 0.0
+  - 0.0
+  mass: 5
+  position:
+    rpy:
+    - 0.0
+    - 0.0
+    - 0.0
+    xyz:
+    - 0.3
+    - 0.3
+    - 0.5
+  size:
+  - 0.3
+  - 0.3
+  - 0.3
+  type: box
+  visual: box
+points:
+- frame:
+  - -1.0
+  - -1.0
+  - 2.0
+  platform:
+  - -0.15
+  - -0.15
+  - 0.15
+- frame:
+  - -1.0
+  - 1.0
+  - 2.0
+  platform:
+  - -0.15
+  - 0.15
+  - 0.15
+- frame:
+  - 1.0
+  - 1.0
+  - 2.0
+  platform:
+  - 0.15
+  - 0.15
+  - 0.15
+- frame:
+  - 1.0
+  - -1.0
+  - 2.0
+  platform:
+  - 0.15
+  - -0.15
+  - 0.15
+- frame:
+  - -1.0
+  - -1.0
+  - 0.0
+  platform:
+  - -0.15
+  - -0.15
+  - -0.15
+- frame:
+  - -1.0
+  - 1.0
+  - 0.0
+  platform:
+  - -0.15
+  - 0.15
+  - -0.15
+- frame:
+  - 1.0
+  - 1.0
+  - 0.0
+  platform:
+  - 0.15
+  - 0.15
+  - -0.15
+- frame:
+  - 1.0
+  - -1.0
+  - 0.0
+  platform:
+  - 0.15
+  - -0.15
+  - -0.15
+sim_cables: true

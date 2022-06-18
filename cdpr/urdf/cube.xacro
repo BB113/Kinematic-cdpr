@@ -1,0 +1,480 @@
+<?xml version="1.0"?>
+<!-- Revolute-Revolute Manipulator -->
+<robot name="cdpr" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="PI" value="3.1415926535897931" />
+  <xacro:property name="cable_mass" value="0.001" /> <!-- arbitrary value for mass -->
+  <xacro:property name="cable_radius" value="0.001" />
+  <xacro:property name="frame_color" value="orange" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="frame_lower" value="1.0 1.0 0" />
+  <xacro:property name="frame_radius" value="0.02" />
+  <xacro:property name="frame_lenght" value="2" />
+  <xacro:property name="frame_type" value="box" />
+
+  <xacro:property name="cable_color" value="blue" />
+
+  <xacro:property name="platform_size" value="0.3" />
+  <xacro:property name="platform_color" value="red" />
+  <xacro:property name="platform_pos_x" value="0.3" />
+  <xacro:property name="platform_pos_y" value="0.3" />
+  <xacro:property name="platform_pos_z" value="0.5" />
+  <xacro:property name="platform_pos_rpy" value="0" />
+  <xacro:property name="platform_mass" value="5" />
+  <xacro:property name="platform_iaa" value="0.33" /> <!-- ixx iyy izz-->
+  <xacro:property name="platform_iab" value="0" />
+
+  <xacro:property name="mass" value="1" /> <!-- arbitrary value for mass -->
+  <xacro:property name="width" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="height1" value="2" /> <!-- Link 1 -->
+  <xacro:property name="height2" value="1" /> <!-- Link 2 -->
+  <xacro:property name="height3" value="1" /> <!-- Link 3 -->
+  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
+  <xacro:property name="axel_offset" value="0.05" />
+
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <!--<xacro:include filename="$(find cdpr)/urdf/cube.gazebo" /> -->
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find cdpr)/urdf/materials.xacro" />
+  <xacro:include filename="$(find cdpr)/urdf/cube1.xacro" />
+
+
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world" /> 
+
+  <joint name="fixed" type="fixed">
+    <parent link="world" />
+    <child link="frame_1" />
+  </joint> 
+
+  <joint name="float" type="floating">
+    <parent link="world" />
+    <child link="platform"/>
+  </joint>  
+
+  <!-- Base Link -->
+  <link name="frame_1">
+    <collision>
+      <origin xyz="${-frame_lenght/2} ${-frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${-frame_lenght/2} ${-frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${-frame_lenght/2} ${-frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_2">
+    <collision>
+      <origin xyz="${-frame_lenght/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${-frame_lenght/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${-frame_lenght/2} 0 0" rpy="${PI/2} 0 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_3">
+    <collision>
+      <origin xyz="0 ${-frame_lenght/2} 0" rpy="0 ${PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${-frame_lenght/2} 0" rpy="0 ${PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="0 ${-frame_lenght/2} 0" rpy="0 ${PI/2} 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_4">
+    <collision>
+      <origin xyz="${-frame_lenght/2} ${frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${-frame_lenght/2} ${frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${-frame_lenght/2} ${frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_5">
+    <collision>
+      <origin xyz="${frame_lenght/2} ${frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${frame_lenght/2} ${frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${frame_lenght/2} ${frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_6">
+    <collision>
+      <origin xyz="${frame_lenght/2} ${-frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${frame_lenght/2} ${-frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${frame_lenght/2} ${-frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_7">
+    <collision>
+      <origin xyz="0 ${frame_lenght/2} 0" rpy="0 ${-PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${frame_lenght/2} 0" rpy="0 ${-PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="0 ${frame_lenght/2} ${frame_lenght/2}" rpy="0 ${-PI/2} 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_8">
+    <collision>
+      <origin xyz="${frame_lenght/2} 0 0" rpy="0 ${-PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${frame_lenght/2} 0 0" rpy="${-PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${frame_lenght/2} 0 0" rpy="0 ${-PI/2} 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_9">
+    <collision>
+      <origin xyz="${frame_lenght/2} 0 ${frame_lenght}" rpy="0 ${-PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${frame_lenght/2} 0 ${frame_lenght}" rpy="${-PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${frame_lenght/2} 0 ${frame_lenght}" rpy="0 ${-PI/2} 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_10">
+    <collision>
+      <origin xyz="0 ${frame_lenght/2} ${frame_lenght}" rpy="0 ${-PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${frame_lenght/2} ${frame_lenght}" rpy="0 ${-PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="0 ${frame_lenght/2} ${frame_lenght}" rpy="0 ${-PI/2} 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+
+  <link name="frame_11">
+    <collision>
+      <origin xyz="${-frame_lenght/2} 0 ${frame_lenght}" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${-frame_lenght/2} 0 ${frame_lenght}" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${-frame_lenght/2} 0 ${frame_lenght}" rpy="${PI/2} 0 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+  <link name="frame_12">
+    <collision>
+      <origin xyz="0 ${-frame_lenght/2} ${frame_lenght}" rpy="0 ${PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${-frame_lenght/2} ${frame_lenght}" rpy="0 ${PI/2} 0" />
+      <geometry>
+        <cylinder radius="${frame_radius}" length="${frame_lenght}" />
+      </geometry>
+      <material name="${frame_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="0 ${-frame_lenght/2} ${frame_lenght}" rpy="0 ${PI/2} 0" />
+      <mass value="10000" />
+      <inertia ixx="10000" ixy="0.0" ixz="0.0" iyy="10000" iyz="0.0" izz="10000" />
+    </inertial>
+  </link>
+
+
+  <link name="platform">
+    <collision>
+      <origin xyz="${platform_pos_x} ${platform_pos_y} ${platform_pos_z}" rpy="${platform_pos_rpy} ${platform_pos_rpy} ${platform_pos_rpy}" />
+      <geometry>
+        <box size="${platform_size} ${platform_size} ${platform_size}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${platform_pos_x} ${platform_pos_y} ${platform_pos_z}" rpy="${platform_pos_rpy} ${platform_pos_rpy} ${platform_pos_rpy}" />
+      <geometry>
+        <box size="${platform_size} ${platform_size} ${platform_size}" />
+      </geometry>
+      <material name="${platform_color}" />
+    </visual>
+    <inertial>
+      <origin xyz="${platform_pos_x} ${platform_pos_y} ${platform_pos_z}" rpy="${platform_pos_rpy} ${platform_pos_rpy} ${platform_pos_rpy}" />
+      <mass value="${platform_mass}" />
+      <inertia ixx="${platform_iaa}" ixy="${platform_iab}" ixz="${platform_iab}" iyy="${platform_iaa}" iyz="${platform_iab}" izz="${platform_iaa}" />
+    </inertial>
+  </link>
+
+<xacro:macro name="default_joint" params="num1 num2">
+  <joint name="fixed${num1}" type="fixed">
+    <parent link="frame_${num2}" />
+    <child link="frame_${num1}" />
+  </joint>
+</xacro:macro>
+
+<xacro:macro name="loop" params="links_qty">
+  <xacro:default_joint num1="${links_qty+2}" num2="${links_qty+1}"/>
+    <xacro:if value="${links_qty}">
+        <xacro:loop links_qty="${links_qty-1}" />
+    </xacro:if>
+</xacro:macro>
+
+<xacro:macro name="default_joint_cable" params="num1">
+  <joint name="cable_fixed${num1}" type="floating">
+    <child link="frame_1" />
+    <parent link="cable${num1-1}" />
+  </joint>
+</xacro:macro>
+
+<xacro:macro name="loop2" params="links_qty">
+  <xacro:default_joint_cable num1="${links_qty+1}" />
+    <xacro:if value="${links_qty}">
+        <xacro:loop2 links_qty="${links_qty-1}" />
+    </xacro:if>
+</xacro:macro>
+
+<xacro:loop links_qty="10" />
+
+<!-- <xacro:loop2 links_qty="7" /> -->
+<!--
+<joint name="platform_frame_fixed$" type="fixed">
+  <parent link="frame_1" />
+  <child link="platform" />
+</joint> -->
+
+  <!-- Camera -->
+  <!--
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${camera_link} ${camera_link} ${camera_link}" />
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${camera_link} ${camera_link} ${camera_link}" />
+      </geometry>
+      <material name="red" />
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <link name="camera_link_optical"></link>
+  -->
+
+  <!--
+
+  <transmission name="lift_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable0">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_0">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable1">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_1">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable2">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_2">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable3">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_3">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable4">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_4">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable5">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_5">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable6">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_6">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="cable7">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>  
+    <actuator name="lift_motor_7">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+-->
+</robot>
