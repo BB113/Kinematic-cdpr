@@ -345,8 +345,8 @@
 
 <xacro:macro name="default_joint_cable" params="num1">
   <joint name="cable_fixed${num1}" type="floating">
-    <child link="frame_1" />
-    <parent link="cable${num1-1}" />
+    <parent link="frame_1" />
+    <child link="cable${num1-1}" />
   </joint>
 </xacro:macro>
 
@@ -358,6 +358,7 @@
 </xacro:macro>
 
 <xacro:loop links_qty="10" />
+<xacro:loop2 links_qty="7" />
 
 <!-- <xacro:loop2 links_qty="7" /> -->
 <!--

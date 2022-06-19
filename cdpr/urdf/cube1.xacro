@@ -11,9 +11,6 @@
 		<collision>
 			
       
-			<origin xyz="-0.792380 -0.792380 1.756272" rpy="-2.436024 0.575296 -1.353793"/>
-			
-      
 			<geometry>
 				
         
@@ -29,7 +26,7 @@
 		<visual>
 			
       
-			<origin xyz="-0.792380 -0.792380 1.756272" rpy="-2.436024 0.575296 -1.353793"/>
+			<origin xyz="0 0 0.3815953312159479" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -48,9 +45,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="-0.792380 -0.792380 1.756272" rpy="-2.436024 0.575296 -1.353793"/>
 			
       
 			<geometry>
@@ -86,7 +80,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="-1.000000 -1.000000 2.000000" rpy="-2.436024 0.575296 -1.353793"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -105,6 +99,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -143,7 +140,7 @@
 		<inertial>
 			
       
-			<origin xyz="-1.000000 -1.000000 2.000000" rpy="-2.436024 0.575296 -1.353793"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -151,14 +148,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="-1.000000 -1.000000 2.000000" rpy="-2.436024 0.575296 -1.353793"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -182,7 +179,7 @@
 	<joint name="rev_Y0" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-2.436024 0.575296 -1.353793"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X0"/>
@@ -206,7 +203,7 @@
 	<joint name="joint_cable0" type="prismatic">
 		
     
-		<origin xyz="-0.20762000000000003 -0.20762000000000003 0.24372799999999994" rpy="-2.436024 0.575296 -1.353793"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y0"/>
@@ -222,6 +219,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="-2.436024 0.575296 -1.353793"/>
 		
   
 	</joint>
@@ -262,21 +262,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.150000 0.150000 0.650000" rpy="-2.436024 0.575296 -1.353793"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -287,7 +272,7 @@
 	<joint name="rev_Xpf0" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-2.436024 0.575296 -1.353793"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -308,82 +293,10 @@
 	</joint>
 	
   
-	<link name="virt_Ypf0">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.150000 0.150000 0.650000" rpy="-2.436024 0.575296 -1.353793"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf0" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="-2.436024 0.575296 -1.353793"/>
-		
-    
-		<parent link="virt_Xpf0"/>
-		
-    
-		<child link="virt_Ypf0"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf0" type="revolute">
-		
-    
-		<origin xyz="0.150000 0.150000 0.650000" rpy="-2.436024 0.575296 -1.353793"/>
-		
-    
-		<parent link="cable0"/>
-		
-    
-		<child link="virt_Ypf0"/>
-		
-    
-		<axis xyz="0 0 1"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
 	<link name="cable1">
 		
     
 		<collision>
-			
-      
-			<origin xyz="-0.922769 0.963064 1.909338" rpy="2.754717 0.667932 2.113659"/>
 			
       
 			<geometry>
@@ -401,7 +314,7 @@
 		<visual>
 			
       
-			<origin xyz="-0.922769 0.963064 1.909338" rpy="2.754717 0.667932 2.113659"/>
+			<origin xyz="0 0 0.1246936551938369" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -420,9 +333,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="-0.922769 0.963064 1.909338" rpy="2.754717 0.667932 2.113659"/>
 			
       
 			<geometry>
@@ -458,7 +368,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="-1.000000 1.000000 2.000000" rpy="2.754717 0.667932 2.113659"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -477,6 +387,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -515,7 +428,7 @@
 		<inertial>
 			
       
-			<origin xyz="-1.000000 1.000000 2.000000" rpy="2.754717 0.667932 2.113659"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -523,14 +436,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="-1.000000 1.000000 2.000000" rpy="2.754717 0.667932 2.113659"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -554,7 +467,7 @@
 	<joint name="rev_Y1" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="2.754717 0.667932 2.113659"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X1"/>
@@ -578,7 +491,7 @@
 	<joint name="joint_cable1" type="prismatic">
 		
     
-		<origin xyz="-0.07723100000000005 0.03693599999999997 0.09066200000000002" rpy="2.754717 0.667932 2.113659"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y1"/>
@@ -594,6 +507,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="2.754717 0.667932 2.113659"/>
 		
   
 	</joint>
@@ -634,21 +550,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.150000 0.450000 0.650000" rpy="2.754717 0.667932 2.113659"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -659,7 +560,7 @@
 	<joint name="rev_Xpf1" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="2.754717 0.667932 2.113659"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -680,82 +581,10 @@
 	</joint>
 	
   
-	<link name="virt_Ypf1">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.150000 0.450000 0.650000" rpy="2.754717 0.667932 2.113659"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf1" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="2.754717 0.667932 2.113659"/>
-		
-    
-		<parent link="virt_Xpf1"/>
-		
-    
-		<child link="virt_Ypf1"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf1" type="revolute">
-		
-    
-		<origin xyz="0.150000 0.450000 0.650000" rpy="2.754717 0.667932 2.113659"/>
-		
-    
-		<parent link="cable1"/>
-		
-    
-		<child link="virt_Ypf1"/>
-		
-    
-		<axis xyz="0 0 1"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
 	<link name="cable2">
 		
     
 		<collision>
-			
-      
-			<origin xyz="1.061426 1.061426 2.150772" rpy="2.754717 -0.360783 -1.499377"/>
 			
       
 			<geometry>
@@ -773,7 +602,7 @@
 		<visual>
 			
       
-			<origin xyz="1.061426 1.061426 2.150772" rpy="2.754717 -0.360783 -1.499377"/>
+			<origin xyz="0 0 -0.17400716248058878" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -792,9 +621,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="1.061426 1.061426 2.150772" rpy="2.754717 -0.360783 -1.499377"/>
 			
       
 			<geometry>
@@ -830,7 +656,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="1.000000 1.000000 2.000000" rpy="2.754717 -0.360783 -1.499377"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -849,6 +675,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -887,7 +716,7 @@
 		<inertial>
 			
       
-			<origin xyz="1.000000 1.000000 2.000000" rpy="2.754717 -0.360783 -1.499377"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -895,14 +724,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="1.000000 1.000000 2.000000" rpy="2.754717 -0.360783 -1.499377"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -926,7 +755,7 @@
 	<joint name="rev_Y2" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="2.754717 -0.360783 -1.499377"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X2"/>
@@ -950,7 +779,7 @@
 	<joint name="joint_cable2" type="prismatic">
 		
     
-		<origin xyz="-0.06142599999999998 -0.06142599999999998 -0.1507719999999999" rpy="2.754717 -0.360783 -1.499377"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y2"/>
@@ -966,6 +795,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="2.754717 -0.360783 -1.499377"/>
 		
   
 	</joint>
@@ -1006,21 +838,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.450000 0.450000 0.650000" rpy="2.754717 -0.360783 -1.499377"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -1031,7 +848,7 @@
 	<joint name="rev_Xpf2" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="2.754717 -0.360783 -1.499377"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -1052,82 +869,10 @@
 	</joint>
 	
   
-	<link name="virt_Ypf2">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.450000 0.450000 0.650000" rpy="2.754717 -0.360783 -1.499377"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf2" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="2.754717 -0.360783 -1.499377"/>
-		
-    
-		<parent link="virt_Xpf2"/>
-		
-    
-		<child link="virt_Ypf2"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf2" type="revolute">
-		
-    
-		<origin xyz="0.450000 0.450000 0.650000" rpy="2.754717 -0.360783 -1.499377"/>
-		
-    
-		<parent link="cable2"/>
-		
-    
-		<child link="virt_Ypf2"/>
-		
-    
-		<axis xyz="0 0 1"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
 	<link name="cable3">
 		
     
 		<collision>
-			
-      
-			<origin xyz="0.963064 -0.922769 1.909338" rpy="-2.436024 -0.300730 0.780760"/>
 			
       
 			<geometry>
@@ -1145,7 +890,7 @@
 		<visual>
 			
       
-			<origin xyz="0.963064 -0.922769 1.909338" rpy="-2.436024 -0.300730 0.780760"/>
+			<origin xyz="0 0 0.1246936551938369" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1164,9 +909,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="0.963064 -0.922769 1.909338" rpy="-2.436024 -0.300730 0.780760"/>
 			
       
 			<geometry>
@@ -1202,7 +944,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="1.000000 -1.000000 2.000000" rpy="-2.436024 -0.300730 0.780760"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -1221,6 +963,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -1259,7 +1004,7 @@
 		<inertial>
 			
       
-			<origin xyz="1.000000 -1.000000 2.000000" rpy="-2.436024 -0.300730 0.780760"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -1267,14 +1012,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="1.000000 -1.000000 2.000000" rpy="-2.436024 -0.300730 0.780760"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1298,7 +1043,7 @@
 	<joint name="rev_Y3" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-2.436024 -0.300730 0.780760"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X3"/>
@@ -1322,7 +1067,7 @@
 	<joint name="joint_cable3" type="prismatic">
 		
     
-		<origin xyz="0.03693599999999997 -0.07723100000000005 0.09066200000000002" rpy="-2.436024 -0.300730 0.780760"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y3"/>
@@ -1338,6 +1083,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="-2.436024 -0.300730 0.780760"/>
 		
   
 	</joint>
@@ -1378,21 +1126,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.450000 0.150000 0.650000" rpy="-2.436024 -0.300730 0.780760"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -1403,7 +1136,7 @@
 	<joint name="rev_Xpf3" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-2.436024 -0.300730 0.780760"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -1424,82 +1157,10 @@
 	</joint>
 	
   
-	<link name="virt_Ypf3">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.450000 0.150000 0.650000" rpy="-2.436024 -0.300730 0.780760"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf3" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="-2.436024 -0.300730 0.780760"/>
-		
-    
-		<parent link="virt_Xpf3"/>
-		
-    
-		<child link="virt_Ypf3"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf3" type="revolute">
-		
-    
-		<origin xyz="0.450000 0.150000 0.650000" rpy="-2.436024 -0.300730 0.780760"/>
-		
-    
-		<parent link="cable3"/>
-		
-    
-		<child link="virt_Ypf3"/>
-		
-    
-		<axis xyz="0 0 1"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
 	<link name="cable4">
 		
     
 		<collision>
-			
-      
-			<origin xyz="-1.047332 -1.047332 -0.014405" rpy="-1.275355 0.763259 -0.578033"/>
 			
       
 			<geometry>
@@ -1517,7 +1178,7 @@
 		<visual>
 			
       
-			<origin xyz="-1.047332 -1.047332 -0.014405" rpy="-1.275355 0.763259 -0.578033"/>
+			<origin xyz="0 0 -0.06847033160746463" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1536,9 +1197,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="-1.047332 -1.047332 -0.014405" rpy="-1.275355 0.763259 -0.578033"/>
 			
       
 			<geometry>
@@ -1574,7 +1232,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="-1.000000 -1.000000 0.000000" rpy="-1.275355 0.763259 -0.578033"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -1593,6 +1251,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -1631,7 +1292,7 @@
 		<inertial>
 			
       
-			<origin xyz="-1.000000 -1.000000 0.000000" rpy="-1.275355 0.763259 -0.578033"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -1639,14 +1300,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="-1.000000 -1.000000 0.000000" rpy="-1.275355 0.763259 -0.578033"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1670,7 +1331,7 @@
 	<joint name="rev_Y4" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-1.275355 0.763259 -0.578033"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X4"/>
@@ -1694,7 +1355,7 @@
 	<joint name="joint_cable4" type="prismatic">
 		
     
-		<origin xyz="0.04733199999999993 0.04733199999999993 0.014405" rpy="-1.275355 0.763259 -0.578033"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y4"/>
@@ -1710,6 +1371,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="-1.275355 0.763259 -0.578033"/>
 		
   
 	</joint>
@@ -1750,21 +1414,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.150000 0.150000 0.350000" rpy="-1.275355 0.763259 -0.578033"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -1775,7 +1424,7 @@
 	<joint name="rev_Xpf4" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-1.275355 0.763259 -0.578033"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -1796,82 +1445,10 @@
 	</joint>
 	
   
-	<link name="virt_Ypf4">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.150000 0.150000 0.350000" rpy="-1.275355 0.763259 -0.578033"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf4" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="-1.275355 0.763259 -0.578033"/>
-		
-    
-		<parent link="virt_Xpf4"/>
-		
-    
-		<child link="virt_Ypf4"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf4" type="revolute">
-		
-    
-		<origin xyz="0.150000 0.150000 0.350000" rpy="-1.275355 0.763259 -0.578033"/>
-		
-    
-		<parent link="cable4"/>
-		
-    
-		<child link="virt_Ypf4"/>
-		
-    
-		<axis xyz="0 0 1"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
 	<link name="cable5">
 		
     
 		<collision>
-			
-      
-			<origin xyz="-1.356780 1.170634 -0.108585" rpy="1.004067 1.055080 0.619089"/>
 			
       
 			<geometry>
@@ -1889,7 +1466,7 @@
 		<visual>
 			
       
-			<origin xyz="-1.356780 1.170634 -0.108585" rpy="1.004067 1.055080 0.619089"/>
+			<origin xyz="0 0 -0.41012040092864877" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1908,9 +1485,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="-1.356780 1.170634 -0.108585" rpy="1.004067 1.055080 0.619089"/>
 			
       
 			<geometry>
@@ -1946,7 +1520,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="-1.000000 1.000000 0.000000" rpy="1.004067 1.055080 0.619089"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -1965,6 +1539,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -2003,7 +1580,7 @@
 		<inertial>
 			
       
-			<origin xyz="-1.000000 1.000000 0.000000" rpy="1.004067 1.055080 0.619089"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -2011,14 +1588,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="-1.000000 1.000000 0.000000" rpy="1.004067 1.055080 0.619089"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -2042,7 +1619,7 @@
 	<joint name="rev_Y5" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="1.004067 1.055080 0.619089"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X5"/>
@@ -2066,7 +1643,7 @@
 	<joint name="joint_cable5" type="prismatic">
 		
     
-		<origin xyz="0.3567800000000001 -0.17063399999999995 0.108585" rpy="1.004067 1.055080 0.619089"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y5"/>
@@ -2082,6 +1659,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="1.004067 1.055080 0.619089"/>
 		
   
 	</joint>
@@ -2122,21 +1702,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.150000 0.450000 0.350000" rpy="1.004067 1.055080 0.619089"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -2147,7 +1712,7 @@
 	<joint name="rev_Xpf5" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="1.004067 1.055080 0.619089"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -2168,82 +1733,10 @@
 	</joint>
 	
   
-	<link name="virt_Ypf5">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.150000 0.450000 0.350000" rpy="1.004067 1.055080 0.619089"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf5" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="1.004067 1.055080 0.619089"/>
-		
-    
-		<parent link="virt_Xpf5"/>
-		
-    
-		<child link="virt_Ypf5"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf5" type="revolute">
-		
-    
-		<origin xyz="0.150000 0.450000 0.350000" rpy="1.004067 1.055080 0.619089"/>
-		
-    
-		<parent link="cable5"/>
-		
-    
-		<child link="virt_Ypf5"/>
-		
-    
-		<axis xyz="0 0 1"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
 	<link name="cable6">
 		
     
 		<collision>
-			
-      
-			<origin xyz="1.566881 1.566881 -0.360742" rpy="1.004067 -0.700803 -0.396004"/>
 			
       
 			<geometry>
@@ -2261,7 +1754,7 @@
 		<visual>
 			
       
-			<origin xyz="1.566881 1.566881 -0.360742" rpy="1.004067 -0.700803 -0.396004"/>
+			<origin xyz="0 0 -0.8791147021072782" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -2280,9 +1773,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="1.566881 1.566881 -0.360742" rpy="1.004067 -0.700803 -0.396004"/>
 			
       
 			<geometry>
@@ -2318,7 +1808,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="1.000000 1.000000 0.000000" rpy="1.004067 -0.700803 -0.396004"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -2337,6 +1827,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -2375,7 +1868,7 @@
 		<inertial>
 			
       
-			<origin xyz="1.000000 1.000000 0.000000" rpy="1.004067 -0.700803 -0.396004"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -2383,14 +1876,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="1.000000 1.000000 0.000000" rpy="1.004067 -0.700803 -0.396004"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -2414,7 +1907,7 @@
 	<joint name="rev_Y6" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="1.004067 -0.700803 -0.396004"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X6"/>
@@ -2438,7 +1931,7 @@
 	<joint name="joint_cable6" type="prismatic">
 		
     
-		<origin xyz="-0.566881 -0.566881 0.360742" rpy="1.004067 -0.700803 -0.396004"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y6"/>
@@ -2454,6 +1947,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="1.004067 -0.700803 -0.396004"/>
 		
   
 	</joint>
@@ -2494,21 +1990,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.450000 0.450000 0.350000" rpy="1.004067 -0.700803 -0.396004"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -2519,7 +2000,7 @@
 	<joint name="rev_Xpf6" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="1.004067 -0.700803 -0.396004"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -2540,82 +2021,10 @@
 	</joint>
 	
   
-	<link name="virt_Ypf6">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.450000 0.450000 0.350000" rpy="1.004067 -0.700803 -0.396004"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf6" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="1.004067 -0.700803 -0.396004"/>
-		
-    
-		<parent link="virt_Xpf6"/>
-		
-    
-		<child link="virt_Ypf6"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf6" type="revolute">
-		
-    
-		<origin xyz="0.450000 0.450000 0.350000" rpy="1.004067 -0.700803 -0.396004"/>
-		
-    
-		<parent link="cable6"/>
-		
-    
-		<child link="virt_Ypf6"/>
-		
-    
-		<axis xyz="0 0 1"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
 	<link name="cable7">
 		
     
 		<collision>
-			
-      
-			<origin xyz="1.170634 -1.356780 -0.108585" rpy="-1.275355 -0.429106 0.320149"/>
 			
       
 			<geometry>
@@ -2633,7 +2042,7 @@
 		<visual>
 			
       
-			<origin xyz="1.170634 -1.356780 -0.108585" rpy="-1.275355 -0.429106 0.320149"/>
+			<origin xyz="0 0 -0.41012040092864877" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -2652,9 +2061,6 @@
 		
     
 		<inertial>
-			
-      
-			<origin xyz="1.170634 -1.356780 -0.108585" rpy="-1.275355 -0.429106 0.320149"/>
 			
       
 			<geometry>
@@ -2690,7 +2096,7 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
       
-			<origin xyz="1.000000 -1.000000 0.000000" rpy="-1.275355 -0.429106 0.320149"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</inertial>
@@ -2709,6 +2115,9 @@
 			
       
 			<material name="${cable_color}"/>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
     
 		</visual>
@@ -2747,7 +2156,7 @@
 		<inertial>
 			
       
-			<origin xyz="1.000000 -1.000000 0.000000" rpy="-1.275355 -0.429106 0.320149"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<mass value="0.001"/>
@@ -2755,14 +2164,14 @@
       
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 			
-      
-			<origin xyz="1.000000 -1.000000 0.000000" rpy="-1.275355 -0.429106 0.320149"/>
-			
     
 		</inertial>
 		
     
 		<visual>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -2786,7 +2195,7 @@
 	<joint name="rev_Y7" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-1.275355 -0.429106 0.320149"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_X7"/>
@@ -2810,7 +2219,7 @@
 	<joint name="joint_cable7" type="prismatic">
 		
     
-		<origin xyz="-0.17063399999999995 0.3567800000000001 0.108585" rpy="-1.275355 -0.429106 0.320149"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="virt_Y7"/>
@@ -2826,6 +2235,9 @@
 		
     
 		<limit damping="0.1"/>
+		
+    
+		<origin xyz="0 0 0" rpy="-1.275355 -0.429106 0.320149"/>
 		
   
 	</joint>
@@ -2866,21 +2278,6 @@
       
 			<material name="${cable_color}"/>
 			
-      
-			<origin xyz="0.450000 0.150000 0.350000" rpy="-1.275355 -0.429106 0.320149"/>
-			
-      
-			<geometry>
-				
-        
-				<box size="0.1 0.1 0.1"/>
-				
-      
-			</geometry>
-			
-      
-			<material name="${cable_color}"/>
-			
     
 		</visual>
 		
@@ -2891,7 +2288,7 @@
 	<joint name="rev_Xpf7" type="revolute">
 		
     
-		<origin xyz="0 0 0" rpy="-1.275355 -0.429106 0.320149"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
 		
     
 		<parent link="platform"/>
@@ -2901,75 +2298,6 @@
 		
     
 		<axis xyz="1 0 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<link name="virt_Ypf7">
-		
-    
-		<inertial>
-			
-      
-			<origin xyz="0.450000 0.150000 0.350000" rpy="-1.275355 -0.429106 0.320149"/>
-			
-      
-			<mass value="0.001"/>
-			
-      
-			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-			
-    
-		</inertial>
-		
-  
-	</link>
-	
-  
-	<joint name="rev_Ypf7" type="revolute">
-		
-    
-		<origin xyz="0 0 0" rpy="-1.275355 -0.429106 0.320149"/>
-		
-    
-		<parent link="virt_Xpf7"/>
-		
-    
-		<child link="virt_Ypf7"/>
-		
-    
-		<axis xyz="0 1 0"/>
-		
-    
-		<limit effort="10000" velocity="0.25"/>
-		
-    
-		<limit damping="0.1"/>
-		
-  
-	</joint>
-	
-  
-	<joint name="rev_Zpf7" type="revolute">
-		
-    
-		<origin xyz="0.450000 0.150000 0.350000" rpy="-1.275355 -0.429106 0.320149"/>
-		
-    
-		<parent link="cable7"/>
-		
-    
-		<child link="virt_Ypf7"/>
-		
-    
-		<axis xyz="0 0 1"/>
 		
     
 		<limit effort="10000" velocity="0.25"/>
