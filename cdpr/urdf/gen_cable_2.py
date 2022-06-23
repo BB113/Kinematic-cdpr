@@ -8,23 +8,26 @@ from math import *
 import transformations as tr
 from os.path import exists
 
+#j'ai récupéré ce code pour créer un fichier urdf et non sdf
+# les liaisons sphériques au exremités du cable sont modélisées par une mise en série de liaison pivot#
+
 if __name__ == '__main__':
 
     if len(sys.argv) < 2:
         print(' Give a yaml file' )
         sys.exit(0)
 
-    model = sys.argv[1]
-    if not exists(model):
+    robot = sys.argv[1]
+    if not exists(robot):
         for ext in ['.yaml', '.yml', 'yaml','yml']:
-            if exists(model + ext):
-                model += ext
+            if exists(robot + ext):
+                robot += ext
                 break
-    if not exists(model):
-        print(model + ' not found')
+    if not exists(robot):
+        print(robot + ' not found')
         sys.exit(0)
 
-    #d_config = yaml.load(file(model))
+    #d_config = yaml.load(file(robot))
 
     yaml_file = open("cube1.yaml", "r+")
     d_config = yaml.load(yaml_file, Loader=yaml.SafeLoader)
@@ -44,13 +47,24 @@ if __name__ == '__main__':
         d_config['platform']['inertia'][i] = float(d_config['platform']['inertia'][i])
 
     # re-write config
-    with open(model,'w') as f:
+    with open(robot,'w') as f:
             yaml.dump(d_config, f)
 
     config = DictsToNamespace(d_config)
     config.frame.upper = [float(v) for v in config.frame.upper]
     config.frame.lower = [float(v) for v in config.frame.lower]
-    name = model.split('.')[0]
+    name = robot.split('.')[0]
+
+    robot = etree.Element('robot')
+    """
+    # frame
+    robot.insert(2, etree.Comment('Definition of the robot frame'))
+    gazebo=etree.SubElement(robot, 'gazebo')
+
+    base_link = etree.SubElement(gazebo, 'link', name= 'frame')
+    CreateNested(base_link, 'pose', '0 0 0 0 0 0')
+    BuildInertial(base_link, 100000)
+    """
 
     # frame visual
     if config.frame.type == 'box':
@@ -80,10 +94,9 @@ if __name__ == '__main__':
                     # create link
                     ident += 1
 
-    # create platform
+    #create platform data
     if config.platform.type == 'box':
         pose = config.platform.position.xyz + config.platform.position.rpy
-
     # platform translation and rotation
     pf_t = np.array(config.platform.position.xyz).reshape(3,1)
     pf_R = tr.euler_matrix(config.platform.position.rpy[0], config.platform.position.rpy[1], config.platform.position.rpy[2])[:3,:3]
@@ -91,12 +104,13 @@ if __name__ == '__main__':
     l = np.linalg.norm([config.frame.upper[i] - config.frame.lower[i] for i in range(3)])
 
 
-    robot = etree.Element('robot')
+
     # create cables
     if sim_cables:
         robot.insert(2, etree.Comment('Definition of the robot cables'))
         z = [0,0,1]
         for i, cbl in enumerate(config.points):
+
             fp = np.array(cbl.frame).reshape(3,1)  # frame attach point
             # express platform attach point in world frame
             pp = pf_t + np.dot(pf_R, np.array(cbl.platform).reshape(3,1))
@@ -142,7 +156,7 @@ if __name__ == '__main__':
             inertia=etree.SubElement(inertial, 'inertia', ixx="0.001", ixy="0", ixz="0", iyy="0.001", iyz="0", izz="0.001")
             mass=etree.SubElement(inertial, 'mass', value = "0.001")
 
- # virtual link around X
+# virtual link around X
             link = etree.SubElement(robot, 'link', name= 'virt_X%i' % i)
             inertial = etree.SubElement(link, 'inertial')
             l_2 = ('%f %f %f %f %f %f' % tuple(cbl.frame + rpy_gen)).split(" ")
@@ -223,6 +237,8 @@ if __name__ == '__main__':
             origin=etree.SubElement(joint, 'origin', xyz = "0 0 0", rpy=rot_pjx)
             # rotation cable/pf X
 
+
+
             link = etree.SubElement(robot, 'link', name= 'virt_Xpf%i' % i)
             inertial = etree.SubElement(link, 'inertial')
             l_7 = ('%f %f %f %f %f %f' % tuple(list(pp.reshape(3)) + rpy_gen)).split(" ")
@@ -238,6 +254,8 @@ if __name__ == '__main__':
             cylinder=etree.SubElement(geometry, 'box',size = "0.1 0.1 0.1")
             material=etree.SubElement(visual, 'material', name = "${cable_color}")
 
+
+
             # revolute joint around X
             joint = etree.SubElement(robot, 'joint', name= 'rev_Xpf%i' % i)
             joint.set("type", "revolute")
@@ -251,34 +269,36 @@ if __name__ == '__main__':
             limit=etree.SubElement(joint, 'limit', effort=str(config.joints.passive.effort), velocity=str(config.joints.passive.velocity))
             dynamics=etree.SubElement(joint, 'limit', damping=str(config.joints.passive.damping))
 
-            """
+
             # rotation cable/pf Y
             link = etree.SubElement(robot, 'link', name= 'virt_Ypf%i' % i)
             l_10 = ('%f %f %f %f %f %f' % tuple(list(pp.reshape(3)) + rpy_gen)).split(" ")
             inertial = etree.SubElement(link, 'inertial')
             xyz = str(l_10[0]+" "+l_10[1]+" "+l_10[2])
             rpy_pf = str(l_10[3]+" "+l_10[4]+" "+l_10[5])
-            origin_ypf=etree.SubElement(inertial, 'origin', xyz = xyz, rpy = rpy_pf)
+            origin_ypf=etree.SubElement(inertial, 'origin', xyz = "0 0 0", rpy = "0 0 0")
             mass=etree.SubElement(inertial, 'mass', value = "0.001")
             inertia=etree.SubElement(inertial, 'inertia', ixx="0.001", ixy="0", ixz="0", iyy="0.001", iyz="0", izz="0.001")
             origin=etree.SubElement(visual, 'origin', xyz = xyz, rpy = rpy_pf)
             geometry=etree.SubElement(visual, 'geometry')
-            cylinder=etree.SubElement(geometry, 'box',size = "0.1 0.1 0.1")
+            cub=etree.SubElement(geometry, 'box',size = "0.1 0.1 0.1")
             material=etree.SubElement(visual, 'material', name = "${cable_color}")
 
-
+            """
             # revolute joint around Y
             joint = etree.SubElement(robot, 'joint', name= 'rev_Ypf%i' % i)
             joint.set("type", "revolute") 
             l_11 = ('0 0 0 %f %f %f' % tuple(rpy_gen)).split(" ")
             xyz_rjx = "0 0 0"
             rot_rjx = str(l_11[3]+" "+l_11[4]+" "+l_11[5])
-            origin=etree.SubElement(joint, 'origin', xyz = "0 0 0", rpy = rot_rjx)
+            origin=etree.SubElement(joint, 'origin', xyz = "0 0 0", rpy = "0 0 0")
             parent_link=etree.SubElement(joint, 'parent', link = 'virt_Xpf%i' % i)
             child_link=etree.SubElement(joint, 'child', link ='virt_Ypf%i' % i)
             axe=etree.SubElement(joint, 'axis', xyz = '0 1 0')
             limit=etree.SubElement(joint, 'limit', effort=str(config.joints.passive.effort), velocity=str(config.joints.passive.velocity))
             dynamics=etree.SubElement(joint, 'limit', damping=str(config.joints.passive.damping))
+            """
+
 
             # rotation cable/pf Z
             # revolute joint around Z
@@ -287,13 +307,39 @@ if __name__ == '__main__':
             l_9 = ('0 0 0 %f %f %f' % tuple(rpy_gen)).split(" ")
             xyz_rjx = "0 0 0"
             rot_rjx = str(l_9[3]+" "+l_9[4]+" "+l_9[5])
-            origin=etree.SubElement(joint, 'origin', xyz = xyz, rpy = rot_rjx)
-            parent_link=etree.SubElement(joint, 'parent', link = 'cable%i' % i)
+            origin=etree.SubElement(joint, 'origin', xyz = "0 0 "+str(l/2), rpy = "0 0 0")
+            parent_link=etree.SubElement(joint, 'parent', link =  'cable%i'% i)
             child_link=etree.SubElement(joint, 'child', link = 'virt_Ypf%i' % i)
             axe=etree.SubElement(joint, 'axis', xyz = '0 0 1')
             limit=etree.SubElement(joint, 'limit', effort=str(config.joints.passive.effort), velocity=str(config.joints.passive.velocity))
             dynamics=etree.SubElement(joint, 'limit', damping=str(config.joints.passive.damping)) 
-            """
+
+            gazebo=etree.SubElement(robot, 'gazebo')
+            joint = etree.SubElement(gazebo, 'joint', name= 'rev_Ypf%i' % i)
+            joint.set("type", "revolute")
+            CreateNested(joint, 'pose', '0 0 0 %f %f %f' % tuple(rpy_gen))
+            CreateNested(joint, 'parent', 'virt_Xpf%i' % i)
+            CreateNested(joint, 'child', 'virt_Ypf%i' % i)
+            CreateNested(joint, 'axis/xyz', '0 1 0')
+            CreateNested(joint, 'axis/limit/effort', config.joints.passive.effort)
+            CreateNested(joint, 'axis/limit/velocity', config.joints.passive.velocity)
+            CreateNested(joint, 'axis/dynamics/damping', config.joints.passive.damping)
+
+            # SDF materials
+
+            gazebo=etree.SubElement(robot, 'gazebo')
+            gazebo.set("reference","cable%i" % i)
+            CreateNested(gazebo, 'material', 'Gazebo/Red')
+
+            
+
+            # SDF materials
+
+            gazebo=etree.SubElement(robot, 'gazebo')
+            gazebo.set("reference","cable%i" % i)
+            CreateNested(gazebo, 'material', 'Gazebo/Red')
+
+
             # write file
             WriteXACRO(robot, name+'.xacro')
 

@@ -5,6 +5,94 @@
 <!-- =================================================================================== -->
 <!-- Revolute-Revolute Manipulator -->
 <robot name="cdpr">
+  <!-- Ce code permet de générer le cadre du robot, les liaisons entre les parties du cadre et la plateforme-->
+  <!-- Bien faire gaffe à repercuter les valeurs des paramètres changés ici sur cube1.yaml-->
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotNamespace>/cdpr</robotNamespace>
+    </plugin>
+  </gazebo>
+  <transmission name="lift_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable0">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_0">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable5">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_5">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable6">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_6">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="lift_transmission_7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_cable7">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="lift_motor_7">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
   <material name="black">
     <color rgba="0.0 0.0 0.0 1.0"/>
   </material>
@@ -32,6 +120,7 @@
   <!--Definition of the robot cables-->
   <link name="cable0">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.3815953312159479"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -44,6 +133,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.3815953312159479"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -116,6 +206,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="-2.436024 0.575296 -1.353793" xyz="0.150000 0.150000 0.650000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf0" type="revolute">
@@ -126,8 +221,47 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf0">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf0" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable0"/>
+    <child link="virt_Ypf0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf0" type="revolute">
+      <pose>0 0 0 -2.436024 0.575296 -1.353793</pose>
+      <parent>virt_Xpf0</parent>
+      <child>virt_Ypf0</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable0">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable0">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <link name="cable1">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.1246936551938369"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -140,6 +274,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.1246936551938369"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -212,6 +347,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="2.754717 0.667932 2.113659" xyz="0.150000 0.450000 0.650000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf1" type="revolute">
@@ -222,8 +362,47 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf1">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf1" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable1"/>
+    <child link="virt_Ypf1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf1" type="revolute">
+      <pose>0 0 0 2.754717 0.667932 2.113659</pose>
+      <parent>virt_Xpf1</parent>
+      <child>virt_Ypf1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable1">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable1">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <link name="cable2">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.17400716248058878"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -236,6 +415,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.17400716248058878"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -308,6 +488,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="2.754717 -0.360783 -1.499377" xyz="0.450000 0.450000 0.650000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf2" type="revolute">
@@ -318,8 +503,47 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf2">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf2" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable2"/>
+    <child link="virt_Ypf2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf2" type="revolute">
+      <pose>0 0 0 2.754717 -0.360783 -1.499377</pose>
+      <parent>virt_Xpf2</parent>
+      <child>virt_Ypf2</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable2">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable2">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <link name="cable3">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.1246936551938369"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -332,6 +556,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.1246936551938369"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -404,6 +629,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="-2.436024 -0.300730 0.780760" xyz="0.450000 0.150000 0.650000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf3" type="revolute">
@@ -414,8 +644,47 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf3">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf3" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable3"/>
+    <child link="virt_Ypf3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf3" type="revolute">
+      <pose>0 0 0 -2.436024 -0.300730 0.780760</pose>
+      <parent>virt_Xpf3</parent>
+      <child>virt_Ypf3</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable3">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable3">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <link name="cable4">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.06847033160746463"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -428,6 +697,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.06847033160746463"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -500,6 +770,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="-1.275355 0.763259 -0.578033" xyz="0.150000 0.150000 0.350000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf4" type="revolute">
@@ -510,8 +785,47 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf4">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf4" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable4"/>
+    <child link="virt_Ypf4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf4" type="revolute">
+      <pose>0 0 0 -1.275355 0.763259 -0.578033</pose>
+      <parent>virt_Xpf4</parent>
+      <child>virt_Ypf4</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable4">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable4">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <link name="cable5">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.41012040092864877"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -524,6 +838,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.41012040092864877"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -596,6 +911,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="1.004067 1.055080 0.619089" xyz="0.150000 0.450000 0.350000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf5" type="revolute">
@@ -606,8 +926,47 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf5">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf5" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable5"/>
+    <child link="virt_Ypf5"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf5" type="revolute">
+      <pose>0 0 0 1.004067 1.055080 0.619089</pose>
+      <parent>virt_Xpf5</parent>
+      <child>virt_Ypf5</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable5">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable5">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <link name="cable6">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.8791147021072782"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -620,6 +979,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.8791147021072782"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -692,6 +1052,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="1.004067 -0.700803 -0.396004" xyz="0.450000 0.450000 0.350000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf6" type="revolute">
@@ -702,8 +1067,47 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf6">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf6" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable6"/>
+    <child link="virt_Ypf6"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf6" type="revolute">
+      <pose>0 0 0 1.004067 -0.700803 -0.396004</pose>
+      <parent>virt_Xpf6</parent>
+      <child>virt_Ypf6</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable6">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable6">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <link name="cable7">
     <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.41012040092864877"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -716,6 +1120,7 @@
       <material name="blue"/>
     </visual>
     <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.41012040092864877"/>
       <geometry>
         <cylinder length="3.4641016151377544" radius="0.005"/>
       </geometry>
@@ -788,6 +1193,11 @@
         <box size="0.1 0.1 0.1"/>
       </geometry>
       <material name="blue"/>
+      <origin rpy="-1.275355 -0.429106 0.320149" xyz="0.450000 0.150000 0.350000"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
     </visual>
   </link>
   <joint name="rev_Xpf7" type="revolute">
@@ -798,16 +1208,100 @@
     <limit effort="10000" velocity="0.25"/>
     <limit damping="0.1"/>
   </joint>
+  <link name="virt_Ypf7">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="rev_Zpf7" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 1.7320508075688772"/>
+    <parent link="cable7"/>
+    <child link="virt_Ypf7"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="0.25"/>
+    <limit damping="0.1"/>
+  </joint>
+  <gazebo>
+    <joint name="rev_Ypf7" type="revolute">
+      <pose>0 0 0 -1.275355 -0.429106 0.320149</pose>
+      <parent>virt_Xpf7</parent>
+      <child>virt_Ypf7</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>10000</effort>
+          <velocity>0.25</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <gazebo reference="cable7">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="cable7">
+    <material>Gazebo/Red</material>
+  </gazebo>
   <!-- Used for fixing robot to Gazebo 'base_link' -->
   <link name="world"/>
   <joint name="fixed" type="fixed">
     <parent link="world"/>
     <child link="frame_1"/>
   </joint>
-  <joint name="float" type="floating">
+  <!-- le float n'existe pas en sdf et cette liaison sera transformée en fixed dans gazebo -->
+  <!-- Il faut trouver une solution pour le rendre mobile en selectionnant un jeu de liaison qui le lie à world -->
+  <joint name="float_platform" type="floating">
     <parent link="world"/>
     <child link="platform"/>
   </joint>
+  <!-- 
+
+
+  <link name="virt_Xl">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="0.001"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+		</inertial>
+	</link>
+
+  <joint name="prism_1" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="virt_X1" />
+    <child link="platform" />
+    <limit lower="-2" upper="2" effort="10000" velocity="1"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <link name="virt_Yl">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="0.001"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+		</inertial>
+	</link>
+
+  <joint name="prism2" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="virt_X1" />
+    <child link="virt_Y1" />
+    <limit lower="-2" upper="2" effort="10000" velocity="1"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <joint name="prism3" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world" />
+    <child link="virt_Y1" />
+    <limit lower="-2" upper="2" effort="10000" velocity="1"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+-->
   <!-- Base Link -->
   <link name="frame_1">
     <collision>
@@ -1069,197 +1563,62 @@
       <inertia ixx="0.33" ixy="0" ixz="0" iyy="0.33" iyz="0" izz="0.33"/>
     </inertial>
   </link>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed12" type="fixed">
     <parent link="frame_11"/>
     <child link="frame_12"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed11" type="fixed">
     <parent link="frame_10"/>
     <child link="frame_11"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed10" type="fixed">
     <parent link="frame_9"/>
     <child link="frame_10"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed9" type="fixed">
     <parent link="frame_8"/>
     <child link="frame_9"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed8" type="fixed">
     <parent link="frame_7"/>
     <child link="frame_8"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed7" type="fixed">
     <parent link="frame_6"/>
     <child link="frame_7"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed6" type="fixed">
     <parent link="frame_5"/>
     <child link="frame_6"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed5" type="fixed">
     <parent link="frame_4"/>
     <child link="frame_5"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed4" type="fixed">
     <parent link="frame_3"/>
     <child link="frame_4"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed3" type="fixed">
     <parent link="frame_2"/>
     <child link="frame_3"/>
   </joint>
+  <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed2" type="fixed">
     <parent link="frame_1"/>
     <child link="frame_2"/>
   </joint>
-  <joint name="cable_fixed8" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable7"/>
-  </joint>
-  <joint name="cable_fixed7" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable6"/>
-  </joint>
-  <joint name="cable_fixed6" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable5"/>
-  </joint>
-  <joint name="cable_fixed5" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable4"/>
-  </joint>
-  <joint name="cable_fixed4" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable3"/>
-  </joint>
-  <joint name="cable_fixed3" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable2"/>
-  </joint>
-  <joint name="cable_fixed2" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable1"/>
-  </joint>
-  <joint name="cable_fixed1" type="floating">
-    <parent link="frame_1"/>
-    <child link="cable0"/>
-  </joint>
+  <!-- execute la macro -->
   <!-- <xacro:loop2 links_qty="7" /> -->
-  <!--
-<joint name="platform_frame_fixed$" type="fixed">
-  <parent link="frame_1" />
-  <child link="platform" />
-</joint> -->
-  <!-- Camera -->
-  <!--
-  <link name="camera_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="${camera_link} ${camera_link} ${camera_link}" />
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="${camera_link} ${camera_link} ${camera_link}" />
-      </geometry>
-      <material name="red" />
-    </visual>
-
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link>
-
-  <link name="camera_link_optical"></link>
-  -->
-  <!--
-
-  <transmission name="lift_transmission">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable0">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_0">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_1">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable1">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_1">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_2">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable2">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_2">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_3">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable3">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_3">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_4">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable4">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_4">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_5">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable5">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_5">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_6">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable6">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_6">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_7">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable7">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_7">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
--->
 </robot>
 

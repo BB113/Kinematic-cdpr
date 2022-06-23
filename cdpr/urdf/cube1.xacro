@@ -11,6 +11,9 @@
 		<collision>
 			
       
+			<origin xyz="0 0 0.3815953312159479" rpy="0 0 0"/>
+			
+      
 			<geometry>
 				
         
@@ -45,6 +48,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 0.3815953312159479" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -262,6 +268,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.150000 0.150000 0.650000" rpy="-2.436024 0.575296 -1.353793"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -293,10 +314,127 @@
 	</joint>
 	
   
+	<link name="virt_Ypf0">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf0" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable0"/>
+		
+    
+		<child link="virt_Ypf0"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf0" type="revolute">
+			
+      
+			<pose>0 0 0 -2.436024 0.575296 -1.353793</pose>
+			
+      
+			<parent>virt_Xpf0</parent>
+			
+      
+			<child>virt_Ypf0</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable0">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable0">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
 	<link name="cable1">
 		
     
 		<collision>
+			
+      
+			<origin xyz="0 0 0.1246936551938369" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -333,6 +471,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 0.1246936551938369" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -550,6 +691,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.150000 0.450000 0.650000" rpy="2.754717 0.667932 2.113659"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -581,10 +737,127 @@
 	</joint>
 	
   
+	<link name="virt_Ypf1">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf1" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable1"/>
+		
+    
+		<child link="virt_Ypf1"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf1" type="revolute">
+			
+      
+			<pose>0 0 0 2.754717 0.667932 2.113659</pose>
+			
+      
+			<parent>virt_Xpf1</parent>
+			
+      
+			<child>virt_Ypf1</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable1">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable1">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
 	<link name="cable2">
 		
     
 		<collision>
+			
+      
+			<origin xyz="0 0 -0.17400716248058878" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -621,6 +894,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 -0.17400716248058878" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -838,6 +1114,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.450000 0.450000 0.650000" rpy="2.754717 -0.360783 -1.499377"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -869,10 +1160,127 @@
 	</joint>
 	
   
+	<link name="virt_Ypf2">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf2" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable2"/>
+		
+    
+		<child link="virt_Ypf2"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf2" type="revolute">
+			
+      
+			<pose>0 0 0 2.754717 -0.360783 -1.499377</pose>
+			
+      
+			<parent>virt_Xpf2</parent>
+			
+      
+			<child>virt_Ypf2</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable2">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable2">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
 	<link name="cable3">
 		
     
 		<collision>
+			
+      
+			<origin xyz="0 0 0.1246936551938369" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -909,6 +1317,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 0.1246936551938369" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1126,6 +1537,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.450000 0.150000 0.650000" rpy="-2.436024 -0.300730 0.780760"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -1157,10 +1583,127 @@
 	</joint>
 	
   
+	<link name="virt_Ypf3">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf3" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable3"/>
+		
+    
+		<child link="virt_Ypf3"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf3" type="revolute">
+			
+      
+			<pose>0 0 0 -2.436024 -0.300730 0.780760</pose>
+			
+      
+			<parent>virt_Xpf3</parent>
+			
+      
+			<child>virt_Ypf3</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable3">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable3">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
 	<link name="cable4">
 		
     
 		<collision>
+			
+      
+			<origin xyz="0 0 -0.06847033160746463" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1197,6 +1740,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 -0.06847033160746463" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1414,6 +1960,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.150000 0.150000 0.350000" rpy="-1.275355 0.763259 -0.578033"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -1445,10 +2006,127 @@
 	</joint>
 	
   
+	<link name="virt_Ypf4">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf4" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable4"/>
+		
+    
+		<child link="virt_Ypf4"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf4" type="revolute">
+			
+      
+			<pose>0 0 0 -1.275355 0.763259 -0.578033</pose>
+			
+      
+			<parent>virt_Xpf4</parent>
+			
+      
+			<child>virt_Ypf4</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable4">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable4">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
 	<link name="cable5">
 		
     
 		<collision>
+			
+      
+			<origin xyz="0 0 -0.41012040092864877" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1485,6 +2163,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 -0.41012040092864877" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1702,6 +2383,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.150000 0.450000 0.350000" rpy="1.004067 1.055080 0.619089"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -1733,10 +2429,127 @@
 	</joint>
 	
   
+	<link name="virt_Ypf5">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf5" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable5"/>
+		
+    
+		<child link="virt_Ypf5"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf5" type="revolute">
+			
+      
+			<pose>0 0 0 1.004067 1.055080 0.619089</pose>
+			
+      
+			<parent>virt_Xpf5</parent>
+			
+      
+			<child>virt_Ypf5</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable5">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable5">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
 	<link name="cable6">
 		
     
 		<collision>
+			
+      
+			<origin xyz="0 0 -0.8791147021072782" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1773,6 +2586,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 -0.8791147021072782" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -1990,6 +2806,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.450000 0.450000 0.350000" rpy="1.004067 -0.700803 -0.396004"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -2021,10 +2852,127 @@
 	</joint>
 	
   
+	<link name="virt_Ypf6">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf6" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable6"/>
+		
+    
+		<child link="virt_Ypf6"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf6" type="revolute">
+			
+      
+			<pose>0 0 0 1.004067 -0.700803 -0.396004</pose>
+			
+      
+			<parent>virt_Xpf6</parent>
+			
+      
+			<child>virt_Ypf6</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable6">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable6">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
 	<link name="cable7">
 		
     
 		<collision>
+			
+      
+			<origin xyz="0 0 -0.41012040092864877" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -2061,6 +3009,9 @@
 		
     
 		<inertial>
+			
+      
+			<origin xyz="0 0 -0.41012040092864877" rpy="0 0 0"/>
 			
       
 			<geometry>
@@ -2278,6 +3229,21 @@
       
 			<material name="${cable_color}"/>
 			
+      
+			<origin xyz="0.450000 0.150000 0.350000" rpy="-1.275355 -0.429106 0.320149"/>
+			
+      
+			<geometry>
+				
+        
+				<box size="0.1 0.1 0.1"/>
+				
+      
+			</geometry>
+			
+      
+			<material name="${cable_color}"/>
+			
     
 		</visual>
 		
@@ -2307,6 +3273,120 @@
 		
   
 	</joint>
+	
+  
+	<link name="virt_Ypf7">
+		
+    
+		<inertial>
+			
+      
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			
+      
+			<mass value="0.001"/>
+			
+      
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+			
+    
+		</inertial>
+		
+  
+	</link>
+	
+  
+	<joint name="rev_Zpf7" type="revolute">
+		
+    
+		<origin xyz="0 0 1.7320508075688772" rpy="0 0 0"/>
+		
+    
+		<parent link="cable7"/>
+		
+    
+		<child link="virt_Ypf7"/>
+		
+    
+		<axis xyz="0 0 1"/>
+		
+    
+		<limit effort="10000" velocity="0.25"/>
+		
+    
+		<limit damping="0.1"/>
+		
+  
+	</joint>
+	
+  
+	<gazebo>
+		
+    
+		<joint name="rev_Ypf7" type="revolute">
+			
+      
+			<pose>0 0 0 -1.275355 -0.429106 0.320149</pose>
+			
+      
+			<parent>virt_Xpf7</parent>
+			
+      
+			<child>virt_Ypf7</child>
+			
+      
+			<axis>
+				
+        
+				<xyz>0 1 0</xyz>
+				
+        
+				<limit>
+					
+          
+					<effort>10000</effort>
+					
+          
+					<velocity>0.25</velocity>
+					
+        
+				</limit>
+				
+        
+				<dynamics>
+					
+          
+					<damping>0.1</damping>
+					
+        
+				</dynamics>
+				
+      
+			</axis>
+			
+    
+		</joint>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable7">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
+	
+  
+	<gazebo reference="cable7">
+		
+    
+		<material>Gazebo/Red</material>
+		
+  
+	</gazebo>
 	
 
 </robot>

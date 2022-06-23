@@ -2,11 +2,15 @@
 <!-- Revolute-Revolute Manipulator -->
 <robot name="cdpr" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+
+<!-- Ce code permet de générer le cadre du robot, les liaisons entre les parties du cadre et la plateforme-->
+<!-- Bien faire gaffe à repercuter les valeurs des paramètres changés ici sur cube1.yaml-->
+
   <!-- Constants for robot dimensions -->
   <xacro:property name="PI" value="3.1415926535897931" />
-  <xacro:property name="cable_mass" value="0.001" /> <!-- arbitrary value for mass -->
+  <xacro:property name="cable_mass" value="0.001" />
   <xacro:property name="cable_radius" value="0.001" />
-  <xacro:property name="frame_color" value="orange" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="frame_color" value="orange" /> <!-- les couleurs ne fonctionnent pas en fait, que sur urdf viewer -->
   <xacro:property name="frame_lower" value="1.0 1.0 0" />
   <xacro:property name="frame_radius" value="0.02" />
   <xacro:property name="frame_lenght" value="2" />
@@ -24,36 +28,77 @@
   <xacro:property name="platform_iaa" value="0.33" /> <!-- ixx iyy izz-->
   <xacro:property name="platform_iab" value="0" />
 
-  <xacro:property name="mass" value="1" /> <!-- arbitrary value for mass -->
-  <xacro:property name="width" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
-  <xacro:property name="height1" value="2" /> <!-- Link 1 -->
-  <xacro:property name="height2" value="1" /> <!-- Link 2 -->
-  <xacro:property name="height3" value="1" /> <!-- Link 3 -->
-  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
-  <xacro:property name="axel_offset" value="0.05" />
-
-
-  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
-  <!--<xacro:include filename="$(find cdpr)/urdf/cube.gazebo" /> -->
+  <!-- Import all Gazebo-customization elements, including Gazebo colors(au cas ca marcherait un jour) -->
+ <xacro:include filename="$(find cdpr)/urdf/cube.gazebo" /> 
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find cdpr)/urdf/materials.xacro" />
   <xacro:include filename="$(find cdpr)/urdf/cube1.xacro" />
 
-
   <!-- Used for fixing robot to Gazebo 'base_link' -->
+
   <link name="world" /> 
 
   <joint name="fixed" type="fixed">
     <parent link="world" />
     <child link="frame_1" />
-  </joint> 
+  </joint>
 
-  <joint name="float" type="floating">
+  <!-- le float n'existe pas en sdf et cette liaison sera transformée en fixed dans gazebo -->
+  <!-- Il faut trouver une solution pour le rendre mobile en selectionnant un jeu de liaison qui le lie à world -->
+
+
+  <joint name="float_platform" type="floating"> 
     <parent link="world" />
-    <child link="platform"/>
-  </joint>  
+    <child link="platform" />
+  </joint>
+
+<!-- 
+
+
+  <link name="virt_Xl">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="0.001"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+		</inertial>
+	</link>
+
+  <joint name="prism_1" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="virt_X1" />
+    <child link="platform" />
+    <limit lower="-2" upper="2" effort="10000" velocity="1"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <link name="virt_Yl">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="0.001"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+		</inertial>
+	</link>
+
+  <joint name="prism2" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="virt_X1" />
+    <child link="virt_Y1" />
+    <limit lower="-2" upper="2" effort="10000" velocity="1"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <joint name="prism3" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world" />
+    <child link="virt_Y1" />
+    <limit lower="-2" upper="2" effort="10000" velocity="1"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+-->
 
   <!-- Base Link -->
+
   <link name="frame_1">
     <collision>
       <origin xyz="${-frame_lenght/2} ${-frame_lenght/2} ${frame_lenght/2}" rpy="0 0 0" />
@@ -307,7 +352,6 @@
     </inertial>
   </link>
 
-
   <link name="platform">
     <collision>
       <origin xyz="${platform_pos_x} ${platform_pos_y} ${platform_pos_z}" rpy="${platform_pos_rpy} ${platform_pos_rpy} ${platform_pos_rpy}" />
@@ -329,21 +373,22 @@
     </inertial>
   </link>
 
-<xacro:macro name="default_joint" params="num1 num2">
+<xacro:macro name="default_joint" params="num1 num2"> <!-- définit une macro de liaison entre les parties du cube -->
   <joint name="fixed${num1}" type="fixed">
     <parent link="frame_${num2}" />
     <child link="frame_${num1}" />
   </joint>
 </xacro:macro>
 
-<xacro:macro name="loop" params="links_qty">
+<xacro:macro name="loop" params="links_qty"> <!-- permet d'executer la macro en boucle -->
   <xacro:default_joint num1="${links_qty+2}" num2="${links_qty+1}"/>
     <xacro:if value="${links_qty}">
         <xacro:loop links_qty="${links_qty-1}" />
     </xacro:if>
 </xacro:macro>
 
-<xacro:macro name="default_joint_cable" params="num1">
+<!-- Ne sert plus mais permettait de fixer les cables au cadre pour tester les liaisons -->
+<xacro:macro name="default_joint_cable" params="num1"> 
   <joint name="cable_fixed${num1}" type="floating">
     <parent link="frame_1" />
     <child link="cable${num1-1}" />
@@ -357,125 +402,8 @@
     </xacro:if>
 </xacro:macro>
 
-<xacro:loop links_qty="10" />
-<xacro:loop2 links_qty="7" />
+<xacro:loop links_qty="10" /> <!-- execute la macro -->
 
 <!-- <xacro:loop2 links_qty="7" /> -->
-<!--
-<joint name="platform_frame_fixed$" type="fixed">
-  <parent link="frame_1" />
-  <child link="platform" />
-</joint> -->
 
-  <!-- Camera -->
-  <!--
-  <link name="camera_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="${camera_link} ${camera_link} ${camera_link}" />
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="${camera_link} ${camera_link} ${camera_link}" />
-      </geometry>
-      <material name="red" />
-    </visual>
-
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link>
-
-  <link name="camera_link_optical"></link>
-  -->
-
-  <!--
-
-  <transmission name="lift_transmission">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable0">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_0">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_1">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable1">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_1">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_2">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable2">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_2">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_3">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable3">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_3">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_4">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable4">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_4">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_5">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable5">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_5">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_6">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable6">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_6">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="lift_transmission_7">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="cable7">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-    </joint>  
-    <actuator name="lift_motor_7">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
--->
 </robot>
